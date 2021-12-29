@@ -64,10 +64,10 @@ program
       const publicMethods = new PublicMethods();
 
       /** 判断git工作区域是否干净 */
-      // if (!await getGetStatus('isClean')) {
-      //   consola.warn('请先清空本地git工作区域，再拉取api');
-      //   return;
-      // }
+      if (!await getGetStatus('isClean')) {
+        consola.warn('请先清空本地git工作区域，再拉取api');
+        return;
+      }
 
       /** 判断是否存在配置文件 */
 
