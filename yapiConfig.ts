@@ -73,6 +73,15 @@ const genProject = (projectId:string) => {
     serverUrl: 'http://122.51.157.252:3000',
     outputFilePath: `src/apis/${projectId}`,
     projectId,
+    generateApiName:(path, _id) => `api${_id}`,
+    customizeFilter: (api, { currentGitBranch }) => {
+      // 采用 git 分支号做多版本并行的标识
+      const { tag } = api.yapiBaseInfo;
+      if (tag.includes(currentGitBranch)) {
+        console.log(api.id);
+      }
+      return tag.includes(currentGitBranch);
+    },
     generateApiFileTemplate:generateApiFileTemplate(projectId)
   };
 };
