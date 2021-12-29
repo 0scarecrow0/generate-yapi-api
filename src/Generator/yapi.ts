@@ -4,6 +4,7 @@ import consola from 'consola';
 import { JSONSchema4 } from 'json-schema';
 import { propDefinitionsToJsonSchema,jsonSchemaStringToJsonSchema,jsonToJsonSchema,jsonSchemaToType,mockjsTemplateToJsonSchema } from '../utils/yapi';
 import { ApiJson, Interface, IOutPut, IYapiConfig, Method, PropDefinition, RequestBodyType, ReqFormDataType, Required, ResBodyType } from '../types';
+import { getGetStatus } from '../utils';
 
 
 export class yapiGenerator {
@@ -60,7 +61,7 @@ export class yapiGenerator {
 
   /** 过滤接口 并生成ts接口文件 */
   async customFiltering (apijson:ApiJson):Promise<IOutPut[]> {
-
+    const currentGitBranch = await getGetStatus('currentBranch');
     const { customizeFilter } = this.yapiConfig;
     const apiFileList = await Promise.all(apijson.map(async catItem=>{
       const { list,...other } = catItem;
@@ -76,7 +77,7 @@ export class yapiGenerator {
             ...apiItem
           }
         };
-        return customizeFilter ? customizeFilter(newApiItem,{currentGitBranch:'12333'}) : true;
+        return customizeFilter ? customizeFilter(newApiItem,{currentGitBranch}) : true;
       });
 
       /** 过滤之后 生成api类型文件 */
