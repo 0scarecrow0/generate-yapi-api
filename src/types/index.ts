@@ -158,34 +158,18 @@ export interface PropDefinition {
   description: string,
 }
 
-export interface IServerConfig {
+export interface IProjectConfig {
   /**
-   * 构建ts 、js版本
-   *
-   * @example 'ts'
+   * 生成ts 、js版本
    */
   target: 'ts' | 'js',
   /**
-   * YApi 服务地址。
-   *
-   * @example 'http://122.51.157.252:3000'
-   */
-  serverUrl: string,
-  /**
    * 项目id
-   *
-   * @example 'http://122.51.157.252:3000/project/11/interface/api/20' projectId 对应 11
+   * 'http://122.51.157.252:3000/project/11/interface/api/20' projectId 对应 11
    */
   projectId: string,
-  /** cookie _yapi_token */
-  _yapi_token: string,
-  /** cookie _yapi_uid */
-  _yapi_uid: string,
   /**
-   * 输出文件路径。
-   *
-   * 可以是 `相对路径` 或 `绝对路径`。
-   *
+   * 输出api文件路径。
    * @example 'src/api'
    */
   outputFilePath: string,
@@ -196,22 +180,29 @@ export interface IServerConfig {
   customizeFilter?:
   (api: Omit<IOutPut, 'reqInterfaceName' | 'resInterfaceName' | 'requestInterface' | 'responseInterface'>,options: {currentGitBranch: string}) => boolean,
   /**
-     * 文件名称生成规则
-     * @param  {string} path 接口路径 url
-     * @param  {string} _id 接口id
-     * @param  {string} projectId 项目id
-     */
+   * 文件名称生成规则
+   * @param  {string} path 接口路径 url
+   * @param  {string} _id 接口id
+   */
   generateApiName?: (path: string, _id: string | number) => string,
   /**
-     * 自定义代码片段函数
-     * 不配置的话会有默认代码片段
-     */
+   * 自定义代码片段函数
+   */
   generateApiFileTemplate?: (api: IOutPut) => string,
-  /**
-     * 更新文件方式
-     * 1.1.0 废弃，请使用customizeFilter 自定义
-     */
-  updateMode?: ('ADD' | 'DELETE' | 'CHANGE')[],
 }
 
-export type IYapiConfig = Omit<IServerConfig,'_yapi_token'|'_yapi_uid'>
+export type IYapiConfig ={
+  /**
+   * YApi 服务地址。
+   *
+   * @example 'http://122.51.157.252:3000'
+   */
+  serverUrl: string,
+  projectConfigs:IProjectConfig[]
+}
+export type IYapiCookie = {
+  /** cookie _yapi_token */
+  _yapi_token: string,
+  /** cookie _yapi_uid */
+  _yapi_uid: string,
+}

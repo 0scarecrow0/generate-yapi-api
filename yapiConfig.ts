@@ -70,7 +70,6 @@ const generateApiFileTemplate = (projectId: string) => (api) => {
 const genProject = (projectId:string) => {
   return {
     target: 'ts',
-    serverUrl: 'http://122.51.157.252:3000',
     outputFilePath: `src/apis/${projectId}`,
     projectId,
     generateApiName:(path, _id) => `api${_id}`,
@@ -88,10 +87,13 @@ const genProject = (projectId:string) => {
   };
 };
 
-const configs = [
-  genProject('11'),
-  genProject('16')
-];
+const config = {
+  serverUrl: 'http://122.51.157.252:3000',
+  projectConfigs:[
+    genProject('11'),
+    genProject('16')
+  ]
+};
 
 
-module.exports = configs;
+module.exports = config;

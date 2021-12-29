@@ -3,57 +3,35 @@ import JSON5 from 'json5';
 import consola from 'consola';
 import { JSONSchema4 } from 'json-schema';
 import { propDefinitionsToJsonSchema,jsonSchemaStringToJsonSchema,jsonToJsonSchema,jsonSchemaToType,mockjsTemplateToJsonSchema } from '../utils/yapi';
-import { ApiJson, Interface, IOutPut, IYapiConfig, Method, PropDefinition, RequestBodyType, ReqFormDataType, Required, ResBodyType } from '../types';
+import { ApiJson, Interface, IOutPut, IProjectConfig, Method, PropDefinition, RequestBodyType, ReqFormDataType, Required, ResBodyType,IYapiCookie } from './../types/index';
 import { getGetStatus } from '../utils';
 
 
-export class yapiGenerator {
+export class YapiGenerator {
 
-  yapiConfig:IYapiConfig;
-  userInfo:{email:string,password:string}={email:'',password:''};
-  yapiCookie:{_yapi_token:string,_yapi_uid:string}={_yapi_token:'',_yapi_uid:''};
+  projectConfig:IProjectConfig;
+  yapiCookie:IYapiCookie;
+  serverUrl:string;
 
-  constructor (config:IYapiConfig){
-    this.yapiConfig = config;
+  constructor (config:IProjectConfig,yapiCookie:IYapiCookie,serverUrl:string){
+    this.projectConfig = config;
+    this.yapiCookie = yapiCookie;
+    this.serverUrl = serverUrl;
   }
-
-
-  /** 登录yapi  获取token uid */
-  async login({email, password} = this.userInfo) {
-    const { serverUrl } = this.yapiConfig;
-    try {
-      const res = await request({
-        method: 'POST',
-        uri: `${serverUrl}/api/user/login`,
-        body: { email,password },
-        json: true,
-        resolveWithFullResponse: true
-      });
-      const [cookie0, cookie1] = res.headers['set-cookie'];
-      const _yapi_token = cookie0.split(';')[0].split('=')[1];
-      const _yapi_uid = cookie1.split(';')[0].split('=')[1];
-      consola.success('账户已登录');
-      this.yapiCookie = { _yapi_token, _yapi_uid };
-    } catch (e) {
-      consola.error('yapi登录异常');
-      return Promise.reject(e);
-    }
-  }
-
 
   /** 获取projectId项目中所有的api接口 */
   async getProjectApiList({ _yapi_token,_yapi_uid } = this.yapiCookie):Promise<ApiJson>{
     try {
-      const { projectId, serverUrl } = this.yapiConfig;
+      const { projectId } = this.projectConfig;
       const res = await request({
         method: 'GET',
-        uri: `${serverUrl}/api/plugin/export?type=json&pid=${projectId}&status=all&isWiki=false`,
+        uri: `${this.serverUrl}/api/plugin/export?type=json&pid=${projectId}&status=all&isWiki=false`,
         json: true,
         headers: { Cookie: `_yapi_token=${_yapi_token};_yapi_uid=${_yapi_uid}` }
       });
       return res;
     } catch (error) {
-      consola.error(`yapi 拉取projectId:${this.yapiConfig.projectId}项目下apiList异常`);
+      consola.error(`yapi 拉取projectId:${this.projectConfig.projectId}项目下apiList异常`);
       return Promise.reject(error);
     }
   }
@@ -62,7 +40,7 @@ export class yapiGenerator {
   /** 过滤接口 并生成ts接口文件 */
   async customFiltering (apijson:ApiJson):Promise<IOutPut[]> {
     const currentGitBranch = await getGetStatus('currentBranch');
-    const { customizeFilter } = this.yapiConfig;
+    const { customizeFilter } = this.projectConfig;
     const apiFileList = await Promise.all(apijson.map(async catItem=>{
       const { list,...other } = catItem;
       /** 获取到分类下的接口后 过滤数据接口 */
@@ -89,7 +67,7 @@ export class yapiGenerator {
         const responseInterface = await this.generateResponseDataType({
           interfaceInfo: apiTypeItem,
           typeName: resInterfaceName,
-          dataKey: this.yapiConfig.projectId
+          dataKey: this.projectConfig.projectId
         });
         return {
           reqInterfaceName,
@@ -202,11 +180,11 @@ export class yapiGenerator {
 
 
   /** 生成可写入的api数据 */
-  async generateApiList ({email,password}:{email:string,password:string}):Promise<IOutPut[]>{
+  async generateApiList ():Promise<IOutPut[]>{
     try {
-      this.userInfo = {email,password};
+      // this.userInfo = {email,password};
       /** 1.登录 */
-      await this.login();
+      // await this.login();
 
       /** 2.获取projectId下的接口 */
       const apiList = await this.getProjectApiList();
@@ -221,8 +199,8 @@ export class yapiGenerator {
 
   /** 生成api名称 */
   generateApiName({path,_id}: {path: string,_id: string | number,}): string {
-    if (this.yapiConfig.generateApiName) {
-      return this.yapiConfig.generateApiName(path, _id);
+    if (this.projectConfig.generateApiName) {
+      return this.projectConfig.generateApiName(path, _id);
     }
     return String(_id);
   }

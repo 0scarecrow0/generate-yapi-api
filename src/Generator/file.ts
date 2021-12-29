@@ -1,21 +1,19 @@
 import consola from 'consola';
-import { IYapiConfig, IOutPut } from './../types';
-import { yapiGenerator } from './yapi';
+import { IProjectConfig, IOutPut } from '../types';
 import fs from 'fs';
 import { mkdirs,resolvePath, writeFileSync } from '../utils';
 import prettier from 'prettier';
 
 
-export class Generator extends yapiGenerator{
+export class GenerateFile{
 
-  config:IYapiConfig;
+  config:IProjectConfig;
   /** 修改接口文件 */
   modifyFiles: string[] = [];
   /** 新增接口文件 */
   addFiles: string[] = [];
 
-  constructor (config:IYapiConfig){
-    super(config);
+  constructor (config:IProjectConfig){
     this.config = config;
   }
 
