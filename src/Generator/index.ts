@@ -32,7 +32,7 @@ export class Generator extends yapiGenerator{
       const files = fs.readdirSync(resolvePath(this.config.outputFilePath));
       /** 遍历匹配到的接口，并写入文件夹 */
       outputApiList.forEach((api,index)=>{
-        const data = this.generateApiFileTemplate(api);
+        const data = this.generateApiFileTemplateFun(api);
         this.compareApiFile(files, api.name, data);
         this.generateApiInfo(index,outputApiList.length,callback);
       });
@@ -41,9 +41,9 @@ export class Generator extends yapiGenerator{
 
 
   /** 生成api文件模板 */
-  generateApiFileTemplate(api:IOutPut):string{
-    if (this.config.generateApiFileCode) {
-      return this.config.generateApiFileCode(api);
+  generateApiFileTemplateFun(api:IOutPut):string{
+    if (this.config.generateApiFileTemplate) {
+      return this.config.generateApiFileTemplate(api);
     }
     return `
       /**

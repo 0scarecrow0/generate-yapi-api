@@ -206,7 +206,7 @@ export interface IServerConfig {
      * 自定义代码片段函数
      * 不配置的话会有默认代码片段
      */
-  generateApiFileCode?: (api: IOutPut) => string,
+  generateApiFileTemplate?: (api: IOutPut) => string,
   /**
      * 更新文件方式
      * 1.1.0 废弃，请使用customizeFilter 自定义

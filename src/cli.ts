@@ -8,6 +8,8 @@ import consola from 'consola';
 import fs from 'fs';
 import path from 'path';
 import { isArray } from 'lodash';
+import simpleGit from 'simple-git';
+const SimpleGit = simpleGit();
 
 /** 无需预编译即可直接在 Node.js 上执行 TypeScript */
 TSNODE.register({
@@ -16,6 +18,13 @@ TSNODE.register({
     module: 'commonjs'
   }
 });
+
+const gitStatus = async ()=>{
+  const status = await SimpleGit.status();
+  // modified 有更改的文件
+  console.log(status.isClean(),7777);
+};
+gitStatus();
 
 
 /** 获取yapiConfig配置 */
@@ -51,7 +60,7 @@ const  getUserInfo = ():{email:string,password:string}|undefined=>{
       consola.warn(`未获取到账号密码,请仔细检查${filePath}文件,是否配置正确`);
     }
   } catch (error) {
-    consola.warn('未获取到账号密码,请仔细检查配置文件,是否配置正确');
+    consola.error('未获取到账号密码,请仔细检查配置文件,是否配置正确');
   }
 };
 
