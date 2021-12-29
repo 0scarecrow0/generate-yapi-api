@@ -8,8 +8,8 @@ import consola from 'consola';
 import fs from 'fs';
 import path from 'path';
 import { isArray } from 'lodash';
-import simpleGit from 'simple-git';
-const SimpleGit = simpleGit();
+import { getGetStatus } from './utils';
+
 
 /** 无需预编译即可直接在 Node.js 上执行 TypeScript */
 TSNODE.register({
@@ -18,14 +18,6 @@ TSNODE.register({
     module: 'commonjs'
   }
 });
-
-const gitStatus = async ()=>{
-  const status = await SimpleGit.status();
-  // modified 有更改的文件
-  console.log(status.isClean(),7777);
-};
-gitStatus();
-
 
 /** 获取yapiConfig配置 */
 const getYapiConfig=():string|undefined=>{
@@ -102,6 +94,13 @@ program
   .description('获取api接口')
   .action(async () => {
     try {
+
+      /** 判断git工作区域是否干净 */
+      if (!await getGetStatus('isClean')) {
+        consola.warn('请先清空本地git工作区域，再拉取api');
+        return;
+      }
+
       /** 判断是否存在配置文件 */
       const yapiConfigPath = getYapiConfig();
       if (!yapiConfigPath) return;

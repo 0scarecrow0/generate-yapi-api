@@ -22,6 +22,7 @@ module.exports = {
     'comma-dangle': [2, 'never'], // 数组和对象键值对最后一个逗号， never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，always-multiline多行模式必须带逗号，单行模式不能带逗号
     'no-undef': 0,
     '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-explicit-any':0,
     '@typescript-eslint/ban-types': [
       'error',
       {
