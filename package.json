@@ -26,6 +26,7 @@
     "json-schema-generator": "^2.0.6",
     "json-schema-to-typescript": "^10.1.5",
     "json5": "^2.2.0",
+    "listr": "^0.14.3",
     "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
     "prettier": "^2.5.1",

@@ -112,7 +112,7 @@ program
       /** 引入配置文件，判断是否是数组 */
       const configs = require(yapiConfigPath);
       if (isArray(configs)) {
-        configs.forEach(configItem => generatoraFiles((<IYapiConfig>configItem),userInfo));
+        configs.forEach(async configItem => await generatoraFiles((<IYapiConfig>configItem),userInfo));
       }else{
         consola.error(' 配置文件 yapiConfig 配置错误，请仔细检查');
       }
