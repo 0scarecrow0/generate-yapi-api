@@ -77,6 +77,7 @@ const genProject = (projectId:string) => {
     customizeFilter: (api, { currentGitBranch }) => {
       // 采用 git 分支号做多版本并行的标识
       const { tag } = api.yapiBaseInfo;
+      console.log(currentGitBranch,777);
       if (tag.includes(currentGitBranch)) {
         console.log(api.id);
       }
