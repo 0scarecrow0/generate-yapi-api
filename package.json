@@ -36,8 +36,7 @@
     "request": "^2.88.2",
     "request-promise-native": "^1.0.9",
     "simple-git": "^2.48.0",
-    "ts-node": "^10.4.0",
-    "yapi-to-api": "^1.0.2"
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
@@ -56,6 +55,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "yapi-to-api": "^1.0.2"
   }
 }
