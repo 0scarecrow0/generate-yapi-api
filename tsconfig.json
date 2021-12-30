@@ -18,7 +18,7 @@
       "dom"
     ],
     "resolveJsonModule":true,
-    "rootDirs": ["./package.json"]
+    "rootDirs": ["src"]
   },
   "include": [
     "src"

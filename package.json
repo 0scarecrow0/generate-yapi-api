@@ -1,7 +1,11 @@
 {
   "name": "yapi-to-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "自动获取yapi接口，输出前端api，支持ts",
+  "author": "1432686114@qq.com",
+  "main": "client/index.js",
+  "module": "client/index.esm.js",
+  "typing": "client/src/index.d.ts",
   "bin": {
     "yapiTool": "lib/src/cli.js"
   },
@@ -12,34 +16,30 @@
     "lib",
     "client"
   ],
-  "author": "1432686114@qq.com",
   "keywords": [
-    "yfeapi2ts",
     "yapi",
-    "typescript",
-    "typing"
+    "typescript"
   ],
   "license": "MIT",
   "dependencies": {
     "commander": "^8.3.0",
     "consola": "^2.15.3",
+    "enquirer": "^2.3.6",
     "json-schema-generator": "^2.0.6",
     "json-schema-to-typescript": "^10.1.5",
     "json5": "^2.2.0",
     "listr": "^0.14.3",
     "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
-    "ora": "^6.0.1",
     "prettier": "^2.5.1",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.9",
     "simple-git": "^2.48.0",
-    "ts-node": "^10.4.0",
-    "vtils": "^4.53.0"
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
-    "@types/fs-extra": "^9.0.13",
+    "@rollup/plugin-node-resolve": "^13.1.1",
     "@types/json-schema": "^7.0.9",
     "@types/json-schema-generator": "^2.0.0",
     "@types/lodash": "^4.14.178",
@@ -50,6 +50,8 @@
     "@typescript-eslint/parser": "^5.8.0",
     "eslint": "^8.5.0",
     "rollup": "^2.62.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
     "typescript": "^4.5.4"

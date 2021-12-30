@@ -206,3 +206,10 @@ export type IYapiCookie = {
   /** cookie _yapi_uid */
   _yapi_uid: string,
 }
+
+export type IYapiConfigTemplateParams = {
+  target: 'ts'|'js',
+  serverUrl: string,
+  projectIds: string[],
+  outputFilePath: string
+}

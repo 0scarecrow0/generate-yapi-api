@@ -3,6 +3,7 @@ import consola from 'consola';
 import fs from 'fs';
 import path from 'path';
 import { IYapiCookie } from '../types/index';
+import { resolvePath } from '../utils';
 
 export class PublicMethods {
 
@@ -32,10 +33,10 @@ export class PublicMethods {
   /** 获取yapiConfig配置 */
   getYapiConfig():string|undefined{
     /** 查询是否存在ts配置文件 */
-    let configFilePath = path.join(process.cwd(), 'yapiConfig.ts');
+    let configFilePath = resolvePath('yapiConfig.ts');
     /** 如果不存在，替换为js文件 */
     if (!fs.existsSync(configFilePath)) {
-      configFilePath = path.join(process.cwd(), 'yapiConfig.js');
+      configFilePath = resolvePath('yapiConfig.js');
     }
     if (!fs.existsSync(configFilePath)) {
       consola.error('未在项目中找到 yapiConfig 配置文件，请执行init命令');

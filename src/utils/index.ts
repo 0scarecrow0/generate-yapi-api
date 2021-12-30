@@ -23,6 +23,9 @@ export const mkdirs = (dirpath: string, callback: () => any) => {
 /** 写入文件 */
 export const writeFileSync = (dirpath: string, data: string) => fs.writeFileSync(dirpath, data, 'utf8');
 
+/** 删除文件 */
+export const removeFileSync = (dirpath: string) => fs.unlinkSync(dirpath);
+
 
 /** 获取git当前工作区域状态，以及当前分支名 */
 export function getGetStatus(type:'isClean'):Promise<boolean>;
