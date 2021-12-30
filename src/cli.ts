@@ -87,7 +87,6 @@ program
         initial:'src/apis'
       }
     ]);
-    console.log(configs);
     /** 如果文件与选择的 生成文件类型不一致，删除原有的文件，并将类型替换为新的 */
     if (!yapiConfigPath?.includes(`.${configs.target}`)) {
       removeFileSync(yapiConfigPath as string);

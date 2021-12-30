@@ -72,6 +72,8 @@ export interface Interface {
   method: Method,
   /** 所属分类 id */
   catid: number,
+  /** tag 标签 */
+  tag: string,
   /** 仅 GET：请求串 */
   req_query: Array<{
     /** 名称 */
