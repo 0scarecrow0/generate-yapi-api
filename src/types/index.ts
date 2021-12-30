@@ -135,7 +135,7 @@ export interface IOutPut {
   /**
    * yapi 基础数据源，包含yapi该项接口所有源数据
    */
-  yapiBaseInfo: object,
+  yapiBaseInfo: Interface,
 }
 
 

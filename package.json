@@ -1,6 +1,6 @@
 {
   "name": "yapi-to-api",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "自动获取yapi接口，输出前端api，支持ts",
   "author": "scarecrow_xb",
   "main": "client/index.js",
@@ -37,7 +37,7 @@
     "request-promise-native": "^1.0.9",
     "simple-git": "^2.48.0",
     "ts-node": "^10.4.0",
-    "yapi-to-api": "^1.0.0"
+    "yapi-to-api": "^1.0.2"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",

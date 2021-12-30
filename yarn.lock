@@ -2631,6 +2631,48 @@ yapi-to-api@^1.0.0:
     simple-git "^2.48.0"
     ts-node "^10.4.0"
 
+yapi-to-api@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/yapi-to-api/-/yapi-to-api-1.0.1.tgz#4d2d825017046318e4425fceb9e59b2a78155845"
+  integrity sha512-Y0jbwoNsj1cxpG5HT/hrsyoWVj0O/5iWjuQ/oYPVqNB3nf9F2aB03IqEk8NZNaw80LdLLWOZ3qUtPjyeFcaN+Q==
+  dependencies:
+    commander "^8.3.0"
+    consola "^2.15.3"
+    enquirer "^2.3.6"
+    json-schema-generator "^2.0.6"
+    json-schema-to-typescript "^10.1.5"
+    json5 "^2.2.0"
+    listr "^0.14.3"
+    lodash "^4.17.21"
+    mockjs "^1.1.0"
+    prettier "^2.5.1"
+    request "^2.88.2"
+    request-promise-native "^1.0.9"
+    simple-git "^2.48.0"
+    ts-node "^10.4.0"
+    yapi-to-api "^1.0.0"
+
+yapi-to-api@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/yapi-to-api/-/yapi-to-api-1.0.2.tgz#10d615f42b0f80581fbc927e17ce26a113b9e343"
+  integrity sha512-1bQB5/0wVdzOw+zAKMICI3QZbRv3WxilLoDEf631PzVp2t7tgUiS/sptSY6QSukFFNejEJQ+uzn6DrWAVB7Ttg==
+  dependencies:
+    commander "^8.3.0"
+    consola "^2.15.3"
+    enquirer "^2.3.6"
+    json-schema-generator "^2.0.6"
+    json-schema-to-typescript "^10.1.5"
+    json5 "^2.2.0"
+    listr "^0.14.3"
+    lodash "^4.17.21"
+    mockjs "^1.1.0"
+    prettier "^2.5.1"
+    request "^2.88.2"
+    request-promise-native "^1.0.9"
+    simple-git "^2.48.0"
+    ts-node "^10.4.0"
+    yapi-to-api "^1.0.1"
+
 yn@3.1.1:
   version "3.1.1"
   resolved "https://registry.npmmirror.com/yn/download/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
