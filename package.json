@@ -1,6 +1,6 @@
 {
   "name": "yapi-to-api",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "自动获取yapi接口，输出前端api，支持ts",
   "author": "scarecrow_xb",
   "main": "client/index.js",
@@ -55,6 +55,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "yapi-to-api": "^1.0.8"
   }
 }

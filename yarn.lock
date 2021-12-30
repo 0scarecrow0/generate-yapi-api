@@ -2611,10 +2611,10 @@ yallist@^4.0.0:
   resolved "https://registry.npmmirror.com/yallist/download/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha1-m7knkNnA7/7GO+c1GeEaNQGaOnI=
 
-yapi-to-api@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/yapi-to-api/-/yapi-to-api-1.0.0.tgz#9d32cc6837f8930b90f1a6aef3277ecaf6346455"
-  integrity sha512-vfdWsdVH8gQBPE/RXvTxr+vPvZU97NRQ7Cdu2WZbT/Qd0NrcAAyNrZ7WY2svLk8wdkVF7aKPOOIMxQi2McLgvg==
+yapi-to-api@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/yapi-to-api/-/yapi-to-api-1.0.8.tgz#f65a597702aaa0ccb8d322ee1329e4ff46f05388"
+  integrity sha512-niOQM0WtactWXNchR5XRJncsbgXl9Bku9HfA5rHkdB9hlBiTCez6/qmuiDKppLY7YopAyI22NzBisX/i1OZ5zQ==
   dependencies:
     commander "^8.3.0"
     consola "^2.15.3"
@@ -2630,48 +2630,6 @@ yapi-to-api@^1.0.0:
     request-promise-native "^1.0.9"
     simple-git "^2.48.0"
     ts-node "^10.4.0"
-
-yapi-to-api@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/yapi-to-api/-/yapi-to-api-1.0.1.tgz#4d2d825017046318e4425fceb9e59b2a78155845"
-  integrity sha512-Y0jbwoNsj1cxpG5HT/hrsyoWVj0O/5iWjuQ/oYPVqNB3nf9F2aB03IqEk8NZNaw80LdLLWOZ3qUtPjyeFcaN+Q==
-  dependencies:
-    commander "^8.3.0"
-    consola "^2.15.3"
-    enquirer "^2.3.6"
-    json-schema-generator "^2.0.6"
-    json-schema-to-typescript "^10.1.5"
-    json5 "^2.2.0"
-    listr "^0.14.3"
-    lodash "^4.17.21"
-    mockjs "^1.1.0"
-    prettier "^2.5.1"
-    request "^2.88.2"
-    request-promise-native "^1.0.9"
-    simple-git "^2.48.0"
-    ts-node "^10.4.0"
-    yapi-to-api "^1.0.0"
-
-yapi-to-api@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/yapi-to-api/-/yapi-to-api-1.0.2.tgz#10d615f42b0f80581fbc927e17ce26a113b9e343"
-  integrity sha512-1bQB5/0wVdzOw+zAKMICI3QZbRv3WxilLoDEf631PzVp2t7tgUiS/sptSY6QSukFFNejEJQ+uzn6DrWAVB7Ttg==
-  dependencies:
-    commander "^8.3.0"
-    consola "^2.15.3"
-    enquirer "^2.3.6"
-    json-schema-generator "^2.0.6"
-    json-schema-to-typescript "^10.1.5"
-    json5 "^2.2.0"
-    listr "^0.14.3"
-    lodash "^4.17.21"
-    mockjs "^1.1.0"
-    prettier "^2.5.1"
-    request "^2.88.2"
-    request-promise-native "^1.0.9"
-    simple-git "^2.48.0"
-    ts-node "^10.4.0"
-    yapi-to-api "^1.0.1"
 
 yn@3.1.1:
   version "3.1.1"
