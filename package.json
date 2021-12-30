@@ -2,7 +2,7 @@
   "name": "yapi-to-api",
   "version": "1.0.0",
   "description": "自动获取yapi接口，输出前端api，支持ts",
-  "author": "1432686114@qq.com",
+  "author": "scarecrow_xb",
   "main": "client/index.js",
   "module": "client/index.esm.js",
   "typing": "client/src/index.d.ts",
