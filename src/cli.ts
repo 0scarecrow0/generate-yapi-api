@@ -52,7 +52,7 @@ program
   .description('初始化')
   .action(async () => {
     const publicMethods = new PublicMethods();
-    let yapiConfigPath = publicMethods.getYapiConfig();
+    let yapiConfigPath = publicMethods.getYapiConfig(true);
     /** 查看是否存在配置文件 */
     if (yapiConfigPath) {
       /** 请选择是否覆盖 */
@@ -88,10 +88,8 @@ program
       }
     ]);
     /** 如果文件与选择的 生成文件类型不一致，删除原有的文件，并将类型替换为新的 */
-    if (!yapiConfigPath?.includes(`.${configs.target}`)) {
-      removeFileSync(yapiConfigPath as string);
-      yapiConfigPath = resolvePath(`yapiConfig.${configs.target}`);
-    }
+    if (yapiConfigPath &&  !yapiConfigPath?.includes(`.${configs.target}`)) removeFileSync(yapiConfigPath as string);
+    yapiConfigPath = resolvePath(`yapiConfig.${configs.target}`);
     fs.writeFileSync(yapiConfigPath, yapiConfigTemplate(configs));
     consola.success('写入配置文件完毕');
   });

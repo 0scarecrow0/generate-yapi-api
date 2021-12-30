@@ -31,7 +31,7 @@ export class PublicMethods {
 
 
   /** 获取yapiConfig配置 */
-  getYapiConfig():string|undefined{
+  getYapiConfig(isInit = false):string|undefined{
     /** 查询是否存在ts配置文件 */
     let configFilePath = resolvePath('yapiConfig.ts');
     /** 如果不存在，替换为js文件 */
@@ -39,7 +39,8 @@ export class PublicMethods {
       configFilePath = resolvePath('yapiConfig.js');
     }
     if (!fs.existsSync(configFilePath)) {
-      consola.error('未在项目中找到 yapiConfig 配置文件，请执行init命令');
+      /** 不是init命令 提示执行init */
+      !isInit && consola.error('未在项目中找到 yapiConfig 配置文件，请执行init命令');
       return;
     }
     consola.success(`找到配置文件: ${configFilePath}`);

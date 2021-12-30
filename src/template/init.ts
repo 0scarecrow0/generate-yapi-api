@@ -63,17 +63,16 @@ export const yapiConfigTemplate=(params:IYapiConfigTemplateParams)=>{
       projectConfigs: [${params.projectIds.map(el=>`genProject('${el}')`)}]
     };
 
-    module.exports = config;
-
-  `;
+    module.exports = config;`;
   }
   return `
-    const generateApiFileTemplate = (projectId: string) => (api) => {
+
+    import { IYapiConfig,IProjectConfig,IOutPut } from 'yapi-to-api';
+
+    const generateApiFileTemplate = (projectId: string) => (api:IOutPut) => {
 
       const arr = [
         \`
-        /* eslint-disable */
-        // @ts-nocheck
         /**
           * \${api.title}
           * ${params.serverUrl}/project/\${projectId}/interface/api/\${api.id}
@@ -92,7 +91,7 @@ export const yapiConfigTemplate=(params:IYapiConfigTemplateParams)=>{
         const paramsKeys = api.path.match(Reg).map((el:string) => el.replace('{', '').replace('}', ''));
         const paramsKeysStr = paramsKeys.reduce((prev:string, value:string) => { prev += \`\${value},\`;return prev;}, '');
         arr.push(\`
-          export default (\${paramsKeysStr} data?: IReq\${api.id}): Promise<\${api.resInterfaceName}> => request({
+          export default (\${paramsKeysStr} data?: \${api.reqInterfaceName}): Promise<\${api.resInterfaceName}> => request({
             method: '\${api.method}',
             url: \${api.path.replace(Reg,'+$1')},
             yapi:'\${projectId}',
@@ -101,7 +100,7 @@ export const yapiConfigTemplate=(params:IYapiConfigTemplateParams)=>{
         \`);
       } else {
         arr.push(\`
-          export default (data?: IReq\${api.id}): Promise<\${api.resInterfaceName}> => request({
+          export default (data?: \${api.reqInterfaceName}): Promise<\${api.resInterfaceName}> => request({
             method: '\${api.method}',
             url: '\${api.path}',
             yapi:'\${projectId}',
@@ -112,28 +111,22 @@ export const yapiConfigTemplate=(params:IYapiConfigTemplateParams)=>{
       return arr.join('');
     };
 
-    const genProject = (projectId:string) => {
+    const genProject = (projectId:string):IProjectConfig => {
       return {
         target: '${params.target}',
         outputFilePath: \`${params.outputFilePath}/\${projectId}\`,
         projectId,
         generateApiName:(path, _id) => \`api\${_id}\`,
         customizeFilter: (api, { currentGitBranch }) => {
-          // 采用 git 分支号做接口过滤
-          const { tag } = api.yapiBaseInfo;
-          return tag.includes(currentGitBranch);
+          return true
         },
         generateApiFileTemplate:generateApiFileTemplate(projectId)
       };
     };
-    const config = {
+    const config:IYapiConfig = {
       serverUrl: '${params.serverUrl}',
       projectConfigs: [ ${params.projectIds.map(el=>`genProject('${el}')`)} ]
     };
 
-    module.exports = config;
-
-  `;
-
-
+    module.exports = config;`;
 };

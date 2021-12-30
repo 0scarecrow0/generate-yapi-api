@@ -1,3 +1,4 @@
+import { isArray } from 'lodash';
 import request from 'request-promise-native';
 import JSON5 from 'json5';
 import consola from 'consola';
@@ -41,6 +42,10 @@ export class YapiGenerator {
   async customFiltering (apijson:ApiJson):Promise<IOutPut[]> {
     const currentGitBranch = await getGetStatus('currentBranch');
     const { customizeFilter } = this.projectConfig;
+    if (!isArray(apijson)) {
+      consola.error(`yapi 中不存在projectId为${this.projectConfig.projectId}的项目`);
+      return [];
+    }
     const apiFileList = await Promise.all(apijson.map(async catItem=>{
       const { list,...other } = catItem;
       /** 获取到分类下的接口后 过滤数据接口 */
@@ -182,11 +187,7 @@ export class YapiGenerator {
   /** 生成可写入的api数据 */
   async generateApiList ():Promise<IOutPut[]>{
     try {
-      // this.userInfo = {email,password};
-      /** 1.登录 */
-      // await this.login();
-
-      /** 2.获取projectId下的接口 */
+      /** 1.获取projectId下的接口 */
       const apiList = await this.getProjectApiList();
 
       /** 过滤数据并生成 ts类型文件 */
