@@ -7,10 +7,11 @@
   "module": "client/index.esm.js",
   "typing": "client/src/index.d.ts",
   "bin": {
-    "yapiTool": "lib/src/cli.js"
+    "yapiTool": "lib/cli.js"
   },
   "scripts": {
-    "build": "rollup -c & tsc"
+    "build": "rollup -c & tsc",
+    "publish:xb": "npm run build && npm publish --access public"
   },
   "files": [
     "lib",
