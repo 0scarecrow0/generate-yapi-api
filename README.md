@@ -3,7 +3,7 @@
 
 ### 安装
 ```
-npm install yapi-to-api -g   or    yarn add global yapi-to-api
+npm install yapi-to-api -g
 ```
 ### 使用
 ```
