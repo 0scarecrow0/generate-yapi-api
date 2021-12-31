@@ -3,7 +3,7 @@ import consola from 'consola';
 import fs from 'fs';
 import path from 'path';
 import { IYapiCookie } from '../types/index';
-import { resolvePath } from '../utils';
+import { resolvePath, userInfoPath } from '../utils';
 
 export class PublicMethods {
 
@@ -23,7 +23,7 @@ export class PublicMethods {
       consola.success('账户已登录');
       return { _yapi_token, _yapi_uid };
     } catch (e) {
-      consola.error('yapi登录异常');
+      consola.error('yapi登录异常,请输入 yta get account 检查账号密码是否正确');
       return Promise.reject(e);
     }
   }
@@ -52,19 +52,17 @@ export class PublicMethods {
   getUserInfo():{email:string,password:string}|undefined{
     try {
     // 获取配置中的账号密码
-      const USER_HOME = (process.env.HOME || process.env.USERPROFILE) as string;
-      const filePath = path.resolve(USER_HOME, '.yapiUser');
-      if (!fs.existsSync(filePath)) {
-        consola.warn(`系统配置中没有检测到 .yapiUser 文件, 请在 ${USER_HOME} 目录中配置该文件`);
+      if (!fs.existsSync(userInfoPath)) {
+        consola.warn('获取账号密码失败，请执行 yta set account 设置yapi账号密码');
       } else {
-        const conf = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        const conf = JSON.parse(fs.readFileSync(userInfoPath, 'utf-8'));
         if (conf.email && conf.password) {
           return { email:conf.email,password:conf.password };
         }
-        consola.warn(`未获取到账号密码,请仔细检查${filePath}文件,是否配置正确`);
+        consola.warn('账号密码异常，请执行 yta get account 查看账号密码是否正确');
       }
     } catch (error) {
-      consola.error('未获取到账号密码,请仔细检查配置文件,是否配置正确');
+      consola.error('yapi 账号密码获取失败');
     }
   }
 

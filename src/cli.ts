@@ -3,8 +3,7 @@ import * as TSNODE from 'ts-node';
 import fs from 'fs';
 import { IProjectConfig, IYapiCookie, IYapiConfig } from './types/index';
 import { Command } from 'commander';
-
-import { getGetStatus, removeFileSync, resolvePath } from './utils';
+import { getGetStatus, removeFileSync, resolvePath,userInfoPath } from './utils';
 import consola from 'consola';
 import { isArray } from 'lodash';
 import { YapiGenerator } from './Generator/yapi';
@@ -24,12 +23,10 @@ TSNODE.register({
 
 const generatoraFiles = async (config: IProjectConfig ,yapiCookie:IYapiCookie,serverUrl:string) => {
   try {
-
     /** yapi操作 */
     const yapiGenerator = new YapiGenerator(config,yapiCookie,serverUrl);
     /** 获取 输出的yapi 数据 */
     const outputList = await yapiGenerator.generateApiList();
-
     /** 写入文件 */
     const generateFile = new GenerateFile(config);
     generateFile.writeFile(outputList, ()=>{
@@ -46,7 +43,7 @@ const program = new Command(pkg.name);
 program.version(pkg.version);
 
 
-/** 初始化命令 */
+/** 初始化配置文件 */
 program
   .command('init')
   .description('初始化')
@@ -95,9 +92,50 @@ program
   });
 
 
+/** 设置 yapi 账号密码 */
+program
+  .command('set account')
+  .description('设置账号密码')
+  .action(async () => {
+    const userInfo = await prompt([
+      {
+        type: 'input',
+        name: 'email',
+        message: '请输入yapi账号',
+        required: true
+      },
+      {
+        type: 'input',
+        name: 'password',
+        message: '输入yapi密码',
+        required: true
+      }
+    ]);
+    if (fs.existsSync(userInfoPath)) removeFileSync(userInfoPath as string);
+    fs.writeFileSync(userInfoPath, JSON.stringify(userInfo));
+    consola.success('账号密码配置成功');
+  });
+
+/** 设置 yapi 账号密码 */
+program
+  .command('get account')
+  .description('设置账号密码')
+  .action(() => {
+    if (!fs.existsSync(userInfoPath)) {
+      consola.warn('获取账号密码失败，请执行 yta set account 设置yapi账号密码');
+      return;
+    } else {
+      const conf = JSON.parse(fs.readFileSync(userInfoPath, 'utf-8'));
+      consola.success(conf);
+    }
+  });
+
+
+
+
 /** 获取接口 */
 program
-  .command('getApi')
+  .command('generate api')
   .description('获取api接口')
   .action(async () => {
     try {

@@ -40,3 +40,7 @@ export async function getGetStatus(type:'isClean'|'currentBranch'):Promise<any>{
       return status.current;
   }
 }
+
+
+/** 账号密码地址 */
+export const userInfoPath = path.resolve((process.env.HOME || process.env.USERPROFILE) as string, '.yapiUser');

@@ -3,24 +3,24 @@
 
 ### 安装
 ```
-npm install yapi-to-api -g
+npm install yapi-to-api -g   or    yarn add global yapi-to-api
 ```
 ### 使用
 ```
 // 1.查看版本号
-yapiTool -V
+yta -V
 
 // 2.初始化
-yapiTool init
+yta init
 
-// 3.本地配置登录账号与密码 路径（～/.yapiUser）
-{
-  "email": "xxxx",
-  "password": "xxxx"
-}
+// 3.全局设置yapi 账号密码
+yta set account
 
-// 3.拉取代码
-yapiTool getApi
+// 4.查看全局 yapi 账号密码
+yta get account
+
+// 5.生成 api 文件
+yta generate api
 ```
 #### yapiConfig配置
 ```
@@ -43,8 +43,7 @@ export interface IProjectConfig {
    * 过滤需要比对的文件方法
    * currentGitBranch 当前git分支号
    */
-  customizeFilter?:
-  (api: Omit<IOutPut, 'reqInterfaceName' | 'resInterfaceName' | 'requestInterface' | 'responseInterface'>,options: {currentGitBranch: string}) => boolean,
+  customizeFilter?:(api,options: {currentGitBranch}) => boolean,
   /**
    * 文件名称生成规则
    */
