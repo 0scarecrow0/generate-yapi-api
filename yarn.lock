@@ -2611,10 +2611,10 @@ yallist@^4.0.0:
   resolved "https://registry.npmmirror.com/yallist/download/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha1-m7knkNnA7/7GO+c1GeEaNQGaOnI=
 
-yapi-to-api@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/yapi-to-api/-/yapi-to-api-1.0.8.tgz#f65a597702aaa0ccb8d322ee1329e4ff46f05388"
-  integrity sha512-niOQM0WtactWXNchR5XRJncsbgXl9Bku9HfA5rHkdB9hlBiTCez6/qmuiDKppLY7YopAyI22NzBisX/i1OZ5zQ==
+yapi-to-api@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.npmmirror.com/yapi-to-api/-/yapi-to-api-1.0.9.tgz#c27dd615de4beebebcb3e548147fee67ceca08b5"
+  integrity sha512-eHmYlcu28QbnzEimBsD/0FtPiKyw1g0+fUys9/PTtkc6gj757n1KxVsg6mnIsc2EJoopH1ijbW4Eleroxs+IOQ==
   dependencies:
     commander "^8.3.0"
     consola "^2.15.3"

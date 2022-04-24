@@ -73,7 +73,7 @@ program
       {
         type: 'list',
         name: 'projectIds',
-        message: '请输入projectId',
+        message: '请输入projectId,逗号分隔',
         initial:'11,22'
       },
       ,

@@ -31,13 +31,19 @@ export const removeFileSync = (dirpath: string) => fs.unlinkSync(dirpath);
 export function getGetStatus(type:'isClean'):Promise<boolean>;
 export function getGetStatus(type:'currentBranch'):Promise<string>;
 export async function getGetStatus(type:'isClean'|'currentBranch'):Promise<any>{
-  const SimpleGit = simpleGit();
-  const status = await SimpleGit.status();
-  switch (type) {
-    case 'isClean':
-      return status.isClean();
-    case 'currentBranch':
-      return status.current;
+  try {
+    /** 存在 git 工作区 */
+    const SimpleGit = simpleGit();
+    const status = await SimpleGit.status();
+    switch (type) {
+      case 'isClean':
+        return status.isClean();
+      case 'currentBranch':
+        return status.current;
+    }
+  } catch (error) {
+    /** 不存在 */
+    return type==='isClean' ? true :'';
   }
 }
 

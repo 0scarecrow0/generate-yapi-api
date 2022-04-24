@@ -1,9 +1,9 @@
 # generate-yapi-api
 基于yapi自动生成api接口，支持ts
 
-### 安装
+### 全局安装
 ```
-npm install yapi-to-api -g
+npm i yapi-to-api -g
 ```
 ### 使用
 ```
