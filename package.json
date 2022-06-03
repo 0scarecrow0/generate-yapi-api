@@ -1,6 +1,6 @@
 {
   "name": "yapi-to-api",
-  "version": "1.1.0",
+  "version": "1.1.01",
   "description": "自动获取yapi接口，输出前端api，支持ts",
   "author": "scarecrow_xb",
   "main": "client/index.js",
@@ -23,6 +23,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "consola": "^2.15.3",
     "enquirer": "^2.3.6",
@@ -32,6 +33,7 @@
     "listr": "^0.14.3",
     "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
+    "ora": "^5.4.0",
     "prettier": "^2.5.1",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.9",

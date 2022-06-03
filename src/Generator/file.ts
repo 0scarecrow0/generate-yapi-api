@@ -3,6 +3,8 @@ import { IProjectConfig, IOutPut } from '../types';
 import fs from 'fs';
 import { mkdirs,resolvePath, writeFileSync } from '../utils';
 import prettier from 'prettier';
+import chalk from 'chalk';
+const chalk_text = chalk.hex('#67e6dc');
 
 
 export class GenerateFile{
@@ -18,12 +20,9 @@ export class GenerateFile{
   }
 
   /** 写入API文件 */
-  async writeFile (outputApiList:IOutPut[],callback?: () => void){
+  async writeFile (outputApiList:IOutPut[],callback?: (index:number,apiLength:number,) => void){
     /** 1.判断是否有写入的文件 */
-    if (outputApiList.length === 0) {
-      consola.info('😄 customizeFilter 没有匹配接口，运行结束');
-      return;
-    }
+    if (outputApiList.length === 0) return;
     /** 2.创建目录-->创建完成执行回调函数 写入文件 */
     mkdirs(this.config.outputFilePath, () => {
       /** 读取目录下的所有文件 */
@@ -32,7 +31,7 @@ export class GenerateFile{
       outputApiList.forEach((api,index)=>{
         const data = this.generateApiFileTemplateFun(api);
         this.compareApiFile(files, api.name, data);
-        this.generateApiInfo(index,outputApiList.length,callback);
+        callback?.(index,outputApiList.length);
       });
     });
   }
@@ -92,24 +91,24 @@ export class GenerateFile{
 
 
   /** 接口写入详情 */
-  generateApiInfo(index:number,apiLength:number,callback?: () => void){
+  generateApiInfo(index:number,apiLength:number){
     if (index !== apiLength - 1) return;
+    consola.log(`=======================👇 projectId: ${this.config.projectId} 👇=====================`);
     if (!this.modifyFiles.length && !this.addFiles.length) {
-      consola.success('接口无变动');
-      return callback?.();
+      consola.log('接口无变动');
+      consola.log(`=======================👆 projectId: ${this.config.projectId} 👆=====================`);
+      return;
     }
     if (this.addFiles.length) {
-      consola.log('---------------------------------------------------');
-      consola.success(`新增接口：${this.addFiles.length} 个:`);
+      consola.log(`新增接口: ${this.addFiles.length} 个`);
       this.addFiles.forEach(e => consola.info(e));
     }
     if (this.modifyFiles.length) {
-      consola.log('---------------------------------------------------');
-      consola.success(`修改接口：${this.modifyFiles.length} 个:`);
+      if (this.addFiles.length) consola.log('---------------------------------------------------');
+      consola.log(`修改接口: ${this.modifyFiles.length} 个`);
       this.modifyFiles.forEach(e => consola.info(e));
     }
-    consola.log('===================================================');
-    consola.warn(`共计更新了${this.addFiles.length + this.modifyFiles.length}个接口文件，请到git工作区比对文件更新`);
-    return callback?.();
+    consola.log(chalk_text(`共计更新${this.addFiles.length + this.modifyFiles.length}个接口文件，请到git工作区比对文件更新`));
+    consola.log(`=======================👆 projectId: ${this.config.projectId} 👆=====================`);
   }
 }

@@ -112,6 +112,10 @@ export async function jsonSchemaToType(jsonSchema: JSONSchema4, typeName: string
   }
   const codeTypeStr = await compile(jsonSchema, typeName, {
     bannerComment: '',
+    /** 格式化代码 */
+    format:false,
+    /** 忽略类型的 maxItems 和 minItems array，防止生成元组。 */
+    ignoreMinAndMaxItems:true,
     style: {
       bracketSpacing: false,
       printWidth: 120,
