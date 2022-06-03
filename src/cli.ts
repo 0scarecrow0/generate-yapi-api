@@ -40,7 +40,7 @@ const generatoraFiles = async (config: IProjectConfig ,yapiCookie:IYapiCookie,se
       spinner.succeed(chalk_sucess(`🏜 Project-${config.projectId}: 没有匹配到接口，运行结束`));
       return;
     }
-    const spinner2 = spinner.succeed(chalk_sucess(`🏝Project-${config.projectId}: 筛选出 ${chalk.hex('#f368e0')(outputList.length)} 个接口`));
+    const spinner2 = spinner.succeed(chalk_sucess(`🏝 Project-${config.projectId}: 筛选出 ${chalk.hex('#f368e0')(outputList.length)} 个接口`));
     /** 写入文件 */
     spinner2.start(chalk_load(`🚀 Project-${config.projectId}: 正在写入文件...`));
     try {
