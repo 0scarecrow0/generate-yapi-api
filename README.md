@@ -1,5 +1,5 @@
 # generate-yapi-api
-基于yapi自动生成api接口，支持ts
+基于yapi自动生成api接口，支持 typeScript
 
 ### 全局安装
 ```
